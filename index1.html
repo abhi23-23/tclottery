@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lottery Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f5f5f5;
+text-align:center;
+}
+
+/* login register box */
+
+.box{
+background:white;
+width:280px;
+margin:120px auto;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 15px rgba(0,0,0,0.2);
+}
+
+input{
+width:90%;
+padding:10px;
+margin:8px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+padding:10px 15px;
+border:none;
+border-radius:5px;
+color:white;
+cursor:pointer;
+margin:5px;
+}
+
+.log{background:#2196F3;}
+.reg{background:#4CAF50;}
+.back{background:#777;}
+
+/* dashboard */
+
+#dashboard{
+display:none;
+padding:20px;
+}
+
+.header{
+background:linear-gradient(45deg,#ff9800,#ff5722);
+color:white;
+padding:15px;
+font-size:22px;
+font-weight:bold;
+}
+
+.card{
+background:white;
+margin:20px auto;
+padding:20px;
+border-radius:10px;
+width:90%;
+max-width:500px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div class="box" id="loginBox">
+
+<h3>Login</h3>
+
+<input id="lnum" placeholder="Mobile Number">
+
+<input id="lpass" type="password" placeholder="Password">
+
+<br>
+
+<button class="log" onclick="login()">Login</button>
+
+<p>No account?
+<a href="#" onclick="showRegister()">Register</a>
+</p>
+
+</div>
+
+
+<!-- REGISTER -->
+
+<div class="box" id="registerBox" style="display:none">
+
+<h3>Create Account</h3>
+
+<input id="rnum" placeholder="Mobile Number">
+
+<input id="rpass" type="password" placeholder="Password">
+
+<br>
+
+<button class="reg" onclick="register()">Register</button>
+
+<button class="back" onclick="showLogin()">Back</button>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboard">
+
+<div class="header">
+Lottery Game Dashboard
+</div>
+
+<div class="card">
+
+<h3>BDG Lottery</h3>
+
+<button class="log"
+onclick="window.location.href='https://bdgorg.com/#/login'">
+Login
+</button>
+
+<button class="reg"
+onclick="window.location.href='https://bdgorg.com/#/register'">
+Register
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Crown99 Lottery</h3>
+
+<button class="log"
+onclick="window.location.href='https://crown99win.online/#/login'">
+Login
+</button>
+
+<button class="reg"
+onclick="window.location.href='https://crown99win.online/#/register?invitationCode=1398251174949'">
+Register
+</button>
+
+</div>
+
+<br>
+
+<button class="back" onclick="logout()">Logout</button>
+
+</div>
+
+
+<script>
+
+function showRegister(){
+document.getElementById("loginBox").style.display="none"
+document.getElementById("registerBox").style.display="block"
+}
+
+function showLogin(){
+document.getElementById("registerBox").style.display="none"
+document.getElementById("loginBox").style.display="block"
+}
+
+function register(){
+
+let num=document.getElementById("rnum").value
+let pass=document.getElementById("rpass").value
+
+if(num.length!=10){
+alert("Enter 10 digit mobile number")
+return
+}
+
+localStorage.setItem("num",num)
+localStorage.setItem("pass",pass)
+
+alert("Register Successful")
+
+showLogin()
+
+}
+
+function login(){
+
+let num=document.getElementById("lnum").value
+let pass=document.getElementById("lpass").value
+
+let sn=localStorage.getItem("num")
+let sp=localStorage.getItem("pass")
+
+if(num==sn && pass==sp){
+
+sessionStorage.setItem("login","yes")
+
+document.getElementById("loginBox").style.display="none"
+document.getElementById("dashboard").style.display="block"
+
+}else{
+
+alert("Wrong Login")
+
+}
+
+}
+
+function logout(){
+
+sessionStorage.clear()
+location.reload()
+
+}
+
+</script>
+
+</body>
+</html>
